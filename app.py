@@ -1,5 +1,9 @@
 import sqlite3
 import os
+import tqdm.contrib.discord
+import random
+from tqdm.contrib.discord
+import commands
 
 from flask import Flask, render_template, request, url_for, redirect, session, jsonify
 from flask_socketio import SocketIO, emit
@@ -319,3 +323,20 @@ def delete_room(r_id):
 
 if __name__ == "__main__":
     socketio.run(app) # , host="0.0.0.0", port=2000, debug=True
+    
+client = commands.Bot(command_prefix = '.')
+@client.event
+async def on_ready():
+    print('Bot is ready. ')
+
+@client.command()
+async def kick(ctx, member: dicord.Member, *, reason = None):
+    await member.kick(reason = reason)
+
+
+@client.command()
+async def ban(ctx, member: dicord.Member, *, reason = None):
+    await member.ban(reason = reason)
+
+client.run('NTY2NDk3NDESNDA4Tc5Mjlx.XLF17g.fSLIvYDEKQLP_UI5TmOJT2gCW2Y')
+                         
